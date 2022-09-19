@@ -25,9 +25,12 @@
 <div class="container">
 <div class="textbox">
 <form onsubmit="on_submit(this);return false;">
-    <input id="dimensions" type="number" placeholder="dimension" value="2">
+    <input id="dimensions" type="number" class="grow" placeholder="dimension" value="2">
+    <button value="0" onclick="show_solution(this)">show Sollution</button>
     <input type="submit" value="generate new" onsubmit="on_submit">
 </form>
+
+
 
 <h1>Skalarprodukt</h1>
 <div class="exercise" id="skalar-container">

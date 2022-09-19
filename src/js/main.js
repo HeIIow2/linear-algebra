@@ -1,3 +1,6 @@
+let r = document.querySelector(':root');
+
+
 class ExerciseElement {
     constructor() {
     }
@@ -48,7 +51,7 @@ class Vector extends ExerciseElement{
     get_html() {
         let all_children;
         if (this.is_solution) {
-            all_children = "<div class=\"vector solution\">\n";
+            all_children = "<div class=\"solution vector\">\n";
         } else {
             all_children = "<div class=\"vector\">\n";
         }
@@ -166,7 +169,6 @@ function generate_new(dimensions) {
 }
 
 
-
 function on_submit(form_element) {
     const dimensions = parseInt(document.getElementById("dimensions").value);
     console.log(dimensions)
@@ -175,4 +177,15 @@ function on_submit(form_element) {
     return false
 }
 
-generate_new(2)
+function show_solution(button) {
+    if (button.value === "0") {
+        //--show-solution: none;
+        r.style.setProperty('--show-solution', 'grid');
+        button.value = "1";
+    } else {
+        r.style.setProperty('--show-solution', 'none');
+        button.value = "0";
+    }
+}
+
+generate_new(2);

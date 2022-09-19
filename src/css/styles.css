@@ -6,15 +6,17 @@
     --bracket-width: 50px;
 
     --operator-width: 50px;
+
+
+    --show-solution: none;
 }
 
 .exercise {
     margin-top: var(--exercise-distance);
 
     display: flex;
-    flex-direction: row;
-
-    --show-solution: inherit;
+    flex-direction: row !important;
+    align-items: center;
 }
 
 .vector {
@@ -24,7 +26,7 @@
 }
 
 .solution {
-    display: var(--show-solution);
+    display: var(--show-solution) !important;
 }
 
 .vector p {
@@ -35,9 +37,11 @@
 }
 
 .vector::before {
+    filter: var(--negation);
     grid-row: 1 / 100;
     grid-column: 1;
     width: var(--bracket-width);
+    min-width: var(--bracket-width) !important;
     background-image: url("assets/parenleft_Roboto-Thin.svg");
     background-repeat: no-repeat;
     background-position: center;
@@ -46,6 +50,7 @@
 }
 
 .vector::after {
+    filter: var(--negation);
     grid-row: 1 / 100;
     grid-column: 3;
     width: var(--bracket-width);

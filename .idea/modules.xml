@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/linear-algebra.iml" filepath="$PROJECT_DIR$/.idea/linear-algebra.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../web/web_framework/.idea/web_framework.iml" filepath="$PROJECT_DIR$/../../web/web_framework/.idea/web_framework.iml" />
     </modules>
   </component>
 </project>
