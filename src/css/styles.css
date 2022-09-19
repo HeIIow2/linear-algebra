@@ -1,0 +1,93 @@
+:root {
+    --exercise-distance: 20px;
+    --number-width: auto;
+    --vector-height: 200px;
+    --vector-padding: 5px;
+    --bracket-width: 50px;
+
+    --operator-width: 50px;
+}
+
+.exercise {
+    margin-top: var(--exercise-distance);
+
+    display: flex;
+    flex-direction: row;
+
+    --show-solution: inherit;
+}
+
+.vector {
+    display: grid !important;
+
+    padding: var(--vector-padding);
+}
+
+.solution {
+    display: var(--show-solution);
+}
+
+.vector p {
+    grid-column: 2;
+    width: var(--number-width);
+
+    padding: var(--vector-padding);
+}
+
+.vector::before {
+    grid-row: 1 / 100;
+    grid-column: 1;
+    width: var(--bracket-width);
+    background-image: url("assets/parenleft_Roboto-Thin.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    content: "";
+}
+
+.vector::after {
+    grid-row: 1 / 100;
+    grid-column: 3;
+    width: var(--bracket-width);
+    background-image: url("assets/parenright_Roboto-Thin.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    content: "";
+}
+
+.crossproduct {
+    width: var(--operator-width);
+    display: flex;
+}
+
+.crossproduct::before{
+    content: "x";
+    align-self: center;
+    text-align: center;
+    flex-grow: 2;
+}
+
+.skalarproduct {
+    width: var(--operator-width);
+    display: flex;
+}
+
+.skalarproduct::before{
+    content: "o";
+    align-self: center;
+    text-align: center;
+    flex-grow: 2;
+}
+
+.equals {
+    width: var(--operator-width);
+    display: flex;
+}
+
+.equals::before{
+    content: "=";
+    align-self: center;
+    text-align: center;
+    flex-grow: 2;
+}
