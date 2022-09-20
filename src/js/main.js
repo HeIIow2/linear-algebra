@@ -63,6 +63,19 @@ class Vector extends ExerciseElement{
     }
 }
 
+class SkalarResuls extends ExerciseElement{
+    constructor(value) {
+        super();
+        this.is_solution = true;
+        this.value = value;
+    }
+
+    get_html() {
+        let string = `<div class="solution skalar-res">${this.value}</div>`
+        return string;
+    }
+}
+
 class Exercise{
     constructor(dimension) {
         this.dimension = dimension
@@ -117,14 +130,17 @@ class Scalarprodukt extends Exercise{
     }
 
     calculate() {
-        let result = new Array(this.dimension).fill(1);
-        for (let vector of this.vectors) {
-            for (let i=0; i<this.dimension; i++) {
-                result[i] = result[i] * vector.contents[i];
+        let total_sum = 0;
+        for (let i=0; i<this.dimension; i++) {
+            let total_multiplication = 1;
+            for (let vector of this.vectors) {
+                total_multiplication = total_multiplication * vector.contents[i];
             }
+            total_sum += total_multiplication;
+            console.log(total_multiplication);
         }
 
-        return new Vector(result, true);
+        return new SkalarResuls(total_sum);
     }
 }
 

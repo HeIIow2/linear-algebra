@@ -96,3 +96,7 @@
     text-align: center;
     flex-grow: 2;
 }
+
+.skalar-res {
+    padding: var(--vector-padding)
+}
