@@ -1,3 +1,4 @@
+const DECIMAL_PLACES = 2;
 let r = document.querySelector(':root');
 
 
@@ -26,7 +27,7 @@ class Skalar extends ExerciseElement{
     }
 
     get_html() {
-        return "<div class='skalarproduct'></div>";
+        return "<div class='skalar-operator'></div>";
     }
 }
 
@@ -36,7 +37,7 @@ class Cross extends ExerciseElement{
     }
 
     get_html() {
-        return "<div class='crossproduct'></div>";
+        return "<div class='cross-operator'></div>";
     }
 }
 
@@ -77,17 +78,23 @@ class SkalarResuls extends ExerciseElement{
 }
 
 class Exercise{
-    constructor(dimension) {
+    constructor(dimension, decimal_place) {
         this.dimension = dimension
+        this.decimal_place = decimal_place
         this.elements = [];
         this.vectors = [];
+    }
+
+    round(number) {
+        const factor_of_ten = Math.pow(10, this.decimal_place);
+        return Math.round(number * factor_of_ten) / factor_of_ten
     }
 
     get_random_value() {
         let min = 1;
         let max = 10;
         let rand = Math.random() * (max - min) + min
-        return Math.floor(rand);
+        return this.round(rand)
     }
 
     get_random_vector(is_solution) {
@@ -120,8 +127,8 @@ class Exercise{
 }
 
 class Scalarprodukt extends Exercise{
-    constructor(dimension) {
-        super(dimension);
+    constructor(dimension, decimal_place) {
+        super(dimension, decimal_place);
         this.add_random_vector(false);
         this.elements.push(new Skalar());
         this.add_random_vector(false);
@@ -137,16 +144,16 @@ class Scalarprodukt extends Exercise{
                 total_multiplication = total_multiplication * vector.contents[i];
             }
             total_sum += total_multiplication;
-            console.log(total_multiplication);
         }
 
+        total_sum = this.round(total_sum);
         return new SkalarResuls(total_sum);
     }
 }
 
 class Crossproduct extends Exercise{
-    constructor(dimension) {
-        super(dimension);
+    constructor(dimension, decimal_place) {
+        super(dimension, decimal_place);
         this.add_random_vector(false);
         this.elements.push(new Cross());
         this.add_random_vector(false);
@@ -163,16 +170,41 @@ class Crossproduct extends Exercise{
         let vec_2 = this.vectors[1].contents
 
         let result = [
-            vec_1[1] * vec_2[2] - vec_1[2] * vec_2[1],
-            vec_1[2] * vec_2[0] - vec_1[0] * vec_2[2],
-            vec_1[0] * vec_2[1] - vec_1[1] * vec_2[0]
+            this.round(vec_1[1] * vec_2[2] - vec_1[2] * vec_2[1]),
+            this.round(vec_1[2] * vec_2[0] - vec_1[0] * vec_2[2]),
+            this.round(vec_1[0] * vec_2[1] - vec_1[1] * vec_2[0])
         ];
 
         return new Vector(result, true);
     }
 }
 
+function generate_skalarprodukt(exercise_element, dimensions, decimal_places) {
+    let skalarprodukt = new Scalarprodukt(dimensions, decimal_places);
+    exercise_element.innerHTML = skalarprodukt.get_inner_html();
+}
+
+function generate_crossprodukt(exercise_element, decimal_places) {
+    let crossprodukt = new Crossproduct(3, decimal_places);
+    exercise_element.innerHTML = crossprodukt.get_inner_html();
+}
+
 function generate_new(dimensions) {
+    for (let exercise_element of document.getElementsByClassName("exercise")) {
+        let decimal_places = 0;
+        if (exercise_element.classList.contains("float")) {decimal_places = DECIMAL_PLACES;}
+
+        if (exercise_element.classList.contains("skalarproduct")) {
+            generate_skalarprodukt(exercise_element, dimensions, decimal_places);
+            continue;
+        }
+        if (exercise_element.classList.contains("crossproduct")) {
+            generate_crossprodukt(exercise_element, decimal_places);
+            continue;
+        }
+    }
+
+    /*
     let skalarprodukt_container = document.getElementById("skalar-container");
     if (skalarprodukt_container != null) {
         let skalarprodukt = new Scalarprodukt(dimensions);
@@ -185,14 +217,12 @@ function generate_new(dimensions) {
         let crossprodukt = new Crossproduct(3);
         crossprodukt_container.innerHTML = crossprodukt.get_inner_html();
         console.log(crossprodukt.get_inner_html());
-    }
+    }*/
 }
 
 
 function on_submit(form_element) {
     const dimensions = parseInt(document.getElementById("dimensions").value);
-    console.log(dimensions)
-    console.log("submitted");
     generate_new(dimensions)
     return false
 }

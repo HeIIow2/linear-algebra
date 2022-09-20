@@ -61,24 +61,24 @@
     content: "";
 }
 
-.crossproduct {
+.cross-operator {
     width: var(--operator-width);
     display: flex;
 }
 
-.crossproduct::before{
+.cross-operator::before{
     content: "x";
     align-self: center;
     text-align: center;
     flex-grow: 2;
 }
 
-.skalarproduct {
+.skalar-operator {
     width: var(--operator-width);
     display: flex;
 }
 
-.skalarproduct::before{
+.skalar-operator::before{
     content: "o";
     align-self: center;
     text-align: center;
