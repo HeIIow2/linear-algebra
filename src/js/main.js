@@ -148,7 +148,7 @@ class Crossproduct extends Exercise{
 
         let result = [
             vec_1[1] * vec_2[2] - vec_1[2] * vec_2[1],
-            vec_1[2] * vec_2[0] - vec_1[1] * vec_2[2],
+            vec_1[2] * vec_2[0] - vec_1[0] * vec_2[2],
             vec_1[0] * vec_2[1] - vec_1[1] * vec_2[0]
         ];
 
