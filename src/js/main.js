@@ -173,15 +173,19 @@ class Crossproduct extends Exercise{
 }
 
 function generate_new(dimensions) {
-    let skalarprodukt = new Scalarprodukt(dimensions);
     let skalarprodukt_container = document.getElementById("skalar-container");
-    skalarprodukt_container.innerHTML = skalarprodukt.get_inner_html();
-    console.log(skalarprodukt.get_inner_html());
+    if (skalarprodukt_container != null) {
+        let skalarprodukt = new Scalarprodukt(dimensions);
+        skalarprodukt_container.innerHTML = skalarprodukt.get_inner_html();
+        console.log(skalarprodukt.get_inner_html());
+    }
 
-    let crossprodukt = new Crossproduct(3);
     let crossprodukt_container = document.getElementById("cross-container");
-    crossprodukt_container.innerHTML = crossprodukt.get_inner_html();
-    console.log(crossprodukt.get_inner_html());
+    if (crossprodukt_container != null) {
+        let crossprodukt = new Crossproduct(3);
+        crossprodukt_container.innerHTML = crossprodukt.get_inner_html();
+        console.log(crossprodukt.get_inner_html());
+    }
 }
 
 
